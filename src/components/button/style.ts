@@ -16,7 +16,7 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontStyle: "normal",
     lineHeight: 26,
-    fontWeight: "400",
+    fontWeight: "500",
   },
 });
 
