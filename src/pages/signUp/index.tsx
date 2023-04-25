@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   SafeAreaView,
   Text,
@@ -16,15 +17,15 @@ import Button from "../../components/button";
 import style from "./style";
 
 const SingUp = () => {
+  const { navigate } = useNavigation();
+
   return (
     <SafeAreaView style={style.container}>
       <Header>
         <View style={style.contentHeader}>
           <TouchableOpacity
             style={style.buttonBack}
-            onPress={() => {
-              console.log("Send -> Screen Sing In");
-            }}
+            onPress={() => navigate("Login")}
           >
             <Ionicons name="arrow-back" size={30} color="black" />
           </TouchableOpacity>
@@ -77,20 +78,13 @@ const SingUp = () => {
           </Text>
         </View>
         <View style={style.contentButton}>
-          <Button
-            title={"Create account"}
-            onPress={() => {
-              console.log("Create Account");
-            }}
-          />
+          <Button title={"Create account"} onPress={() => navigate("HomeTab")} />
         </View>
         <Text style={style.loginHere}>
           Already have an account?{" "}
           <Text
             style={[style.bold, style.underline]}
-            onPress={() => {
-              console.log("Send -> Screen Sing In");
-            }}
+            onPress={() => navigate("Login")}
           >
             Log in Here
           </Text>

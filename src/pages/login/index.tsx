@@ -1,4 +1,5 @@
-import { SafeAreaView, Text, View, TouchableOpacity } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Header from "../../components/header";
 import Input from "../../components/input";
@@ -7,6 +8,8 @@ import Button from "../../components/button";
 import style from "./style";
 
 const Login = () => {
+  const { navigate } = useNavigation();
+
   return (
     <SafeAreaView style={style.container}>
       <Header />
@@ -20,21 +23,11 @@ const Login = () => {
           <Text style={style.label}>Password</Text>
           <Input inputype={"password"} placeholder="Minimum 8 characters" />
         </View>
-        <Button
-          title={"Login"}
-          onPress={() => {
-            console.log(" Screen -> Home");
-          }}
-        />
+        <Button title={"Login"} onPress={() => navigate('HomeTab')} />
       </View>
       <Text style={style.register}>
         Don’t have an account?
-        <Text
-          style={style.signUp}
-          onPress={() => {
-            console.log("Send -> Screen Sing Up");
-          }}
-        >
+        <Text style={style.signUp} onPress={() => navigate('SingUp')}>
           {" "}
           Sign up{" "}
         </Text>

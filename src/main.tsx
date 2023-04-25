@@ -1,8 +1,7 @@
-import Login from "./pages/login";
-import SingUp from "./pages/signUp";
+import Routes from "./routers/app.routes";
 
 const Main = () => {
-  return <SingUp />;
+  return <Routes />;
 };
 
 export default Main;
