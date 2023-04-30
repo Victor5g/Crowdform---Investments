@@ -7,6 +7,7 @@ const style = StyleSheet.create({
     borderColor: "#F4F4F4",
     borderBottomWidth: 2,
     justifyContent: "center",
+    alignItems:"center",
     padding: 16,
   },
 });
