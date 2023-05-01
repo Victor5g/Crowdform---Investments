@@ -19,7 +19,8 @@
 
 ## 🖼 GIF 
 <p align="center">
- 
+ <img src='https://user-images.githubusercontent.com/51713169/235527319-9d2a1d6b-80e6-48ff-9174-9fee5cdbd494.gif' width='330' />
+
 </p>
 
 ## ✨ Technologies 
