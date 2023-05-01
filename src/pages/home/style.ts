@@ -25,7 +25,6 @@ const style = StyleSheet.create({
     padding: 8,
     width: "auto",
     height: "auto",
-    //backgroundColor:'#F4F4F4',
     borderRadius: 100,
   },
 
@@ -169,6 +168,99 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontStyle: "normal",
     lineHeight: 18,
+  },
+
+  contentLearn: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    marginTop: 30,
+  },
+
+  boxLearn: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "#770FDF",
+    padding: 20,
+    borderRadius: 10,
+  },
+
+  contentLearnLabel: {
+    width: "55%",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: 9,
+  },
+
+  labelLearn: {
+    fontStyle: "normal",
+    fontWeight: "600",
+    color: "#FFFFFF",
+    fontSize: 22,
+    lineHeight: 20,
+  },
+
+  subLabelLearn: {
+    fontStyle: "normal",
+    fontWeight: "400",
+    color: "#FFFFFF",
+    fontSize: 18,
+  },
+
+  scrollNews: {
+    width: "100%",
+    height: "auto",
+    marginTop: 15,
+  },
+
+  NewsCard: {
+    width: 180,
+    height: 260,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "#E6E6E6",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "flex-start",
+  },
+
+  labelNewsCard: {
+    fontWeight: "600",
+    color: "#000000",
+    fontSize: 18,
+    fontStyle: "normal",
+    lineHeight: 25,
+    padding: 10,
+  },
+
+  imgaeNews: {
+    width: "100%",
+    height: "40%",
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+  },
+
+  labelRead: {
+    fontWeight: "400",
+    color: "#000000",
+    fontSize: 16,
+    fontStyle: "normal",
+    marginLeft: 10,
+    textDecorationLine: "underline",
+  },
+
+  contentSourceNews: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginTop: 10,
+    paddingLeft: 10,
+  },
+
+  labelSourceNews: {
+    fontStyle: "normal",
+    fontWeight: "400",
   },
 });
 

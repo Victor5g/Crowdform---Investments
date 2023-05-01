@@ -4,8 +4,15 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import { AntDesign, Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  Feather,
+  FontAwesome5,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { LineChart } from "react-native-chart-kit";
 
 import Header from "../../components/header";
@@ -110,6 +117,7 @@ const Home = () => {
         <View style={style.bodyScreen}>
           <View style={style.contentFunds}>
             <Text style={style.labelContent}>Funds</Text>
+
             <ScrollView
               style={style.scrollFunds}
               contentContainerStyle={style.containerStyleScroll}
@@ -121,7 +129,10 @@ const Home = () => {
                 <Text style={style.labelCard}>Wind Fund</Text>
                 <LineChart
                   style={{ marginLeft: -55 }}
-                  data={{ ...data, datasets: [{ data: [...mockBase[0]] }] }}
+                  data={{
+                    ...data,
+                    datasets: [{ data: [...mockBase[2], ...mockBase[0]] }],
+                  }}
                   width={176}
                   height={80}
                   chartConfig={chartConfig("rgba(15, 223, 143,  100)")}
@@ -181,7 +192,10 @@ const Home = () => {
                 <Text style={style.labelCard}>Nature Fund</Text>
                 <LineChart
                   style={{ marginLeft: -55 }}
-                  data={{ ...data, datasets: [{ data: [...mockBase[2]] }] }}
+                  data={{
+                    ...data,
+                    datasets: [{ data: [...mockBase[0], ...mockBase[2]] }],
+                  }}
                   width={176}
                   height={80}
                   chartConfig={chartConfig("rgba(15, 223, 143,  100)")}
@@ -201,6 +215,138 @@ const Home = () => {
                   </View>
                 </View>
               </TouchableOpacity>
+
+              <TouchableOpacity style={style.fundCard}>
+                <Ionicons name="water-outline" size={24} color="#000000" />
+                <Text style={style.labelCard}>Oil Fund</Text>
+                <LineChart
+                  style={{ marginLeft: -55 }}
+                  data={{
+                    ...data,
+                    datasets: [{ data: [...mockBase[0], ...mockBase[1]] }],
+                  }}
+                  width={176}
+                  height={80}
+                  chartConfig={chartConfig("rgba(238, 134, 136, 1)")}
+                  withHorizontalLabels={false}
+                  withHorizontalLines={false}
+                  withVerticalLabels={false}
+                  withInnerLines={false}
+                  withOuterLines={false}
+                  withDots={false}
+                  withShadow={false}
+                />
+                <View style={style.contentValueCard}>
+                  <Text style={style.valueLabelFund}>{"$" + "657.89"}</Text>
+                  <View style={style.ContentProfitability}>
+                    <Feather name="arrow-up-right" size={18} color="#EE8688" />
+                    <Text
+                      style={{ ...style.profitabilityCard, color: "#EE8688" }}
+                    >
+                      {"20.32%"}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </ScrollView>
+
+            <TouchableOpacity style={style.contentLearn}>
+              <View style={style.boxLearn}>
+                <View style={style.contentLearnLabel}>
+                  <Text style={style.labelLearn}>
+                    Learn more about carbon credits
+                  </Text>
+                  <Text style={style.subLabelLearn}>
+                    Check out our top tips!
+                  </Text>
+                </View>
+                <Image
+                  style={{ width: 100, height: 100 }}
+                  source={require("../../assets/illustration/statistics.png")}
+                />
+              </View>
+            </TouchableOpacity>
+
+            <ScrollView
+              style={style.scrollNews}
+              contentContainerStyle={style.containerStyleScroll}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <View style={style.NewsCard}>
+                <Image
+                  style={style.imgaeNews}
+                  source={require("../../assets/images/AA1aB1ZK.jpeg")}
+                />
+                <View style={style.contentSourceNews}>
+                  <MaterialIcons name="trip-origin" size={24} color="black" />
+                  <Text style={style.labelSourceNews}>Barrrons</Text>
+                </View>
+                <Text style={style.labelNewsCard}>
+                  Bitcoin Falls Below $29,000.
+                </Text>
+                <Text style={style.labelRead}>Read more</Text>
+              </View>
+
+              <View style={style.NewsCard}>
+                <Image
+                  style={style.imgaeNews}
+                  source={require("../../assets/images/JHGHHTYU.png")}
+                />
+                <View style={style.contentSourceNews}>
+                  <MaterialIcons name="trip-origin" size={24} color="black" />
+                  <Text style={style.labelSourceNews}>The Montley</Text>
+                </View>
+                <Text style={style.labelNewsCard}>
+                  Want Growing Dividend Income?
+                </Text>
+                <Text style={style.labelRead}>Read more</Text>
+              </View>
+
+              <View style={style.NewsCard}>
+                <Image
+                  style={style.imgaeNews}
+                  source={require("../../assets/images/GHTYRUI.png")}
+                />
+                <View style={style.contentSourceNews}>
+                  <MaterialIcons name="trip-origin" size={24} color="black" />
+                  <Text style={style.labelSourceNews}>Reuters</Text>
+                </View>
+                <Text style={style.labelNewsCard}>
+                  3 Stocks to Avoid This Week
+                </Text>
+                <Text style={style.labelRead}>Read more</Text>
+              </View>
+
+              <View style={style.NewsCard}>
+                <Image
+                  style={style.imgaeNews}
+                  source={require("../../assets/images/LKJARTYU.png")}
+                />
+                <View style={style.contentSourceNews}>
+                  <MaterialIcons name="trip-origin" size={24} color="black" />
+                  <Text style={style.labelSourceNews}>MediaFeed</Text>
+                </View>
+                <Text style={style.labelNewsCard}>
+                  Is It Time to Sell Netflix Stock?
+                </Text>
+                <Text style={style.labelRead}>Read more</Text>
+              </View>
+
+              <View style={style.NewsCard}>
+                <Image
+                  style={style.imgaeNews}
+                  source={require("../../assets/images/YUIXVL.png")}
+                />
+                <View style={style.contentSourceNews}>
+                  <MaterialIcons name="trip-origin" size={24} color="black" />
+                  <Text style={style.labelSourceNews}>Barrrons</Text>
+                </View>
+                <Text style={style.labelNewsCard}>
+                  Tesla Inc. stock rises Friday.
+                </Text>
+                <Text style={style.labelRead}>Read more</Text>
+              </View>
             </ScrollView>
           </View>
         </View>
