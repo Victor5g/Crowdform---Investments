@@ -20,6 +20,7 @@
 ## 🖼 GIF 
 <p align="center">
  <img src='https://user-images.githubusercontent.com/51713169/235527319-9d2a1d6b-80e6-48ff-9174-9fee5cdbd494.gif' width='330' />
+ <img src='https://user-images.githubusercontent.com/51713169/235528364-2f7eddd3-1056-438c-a2a3-adeaccd1e1b2.gif' width='330' />
 
 </p>
 
