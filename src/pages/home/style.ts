@@ -101,7 +101,74 @@ const style = StyleSheet.create({
   bodyScreen: {
     width: "100%",
     height: "auto",
+  },
+
+  contentFunds: {
+    width: "100%",
+    flexDirection: "column",
+    marginTop: 20,
+  },
+
+  labelContent: {
+    fontWeight: "600",
+    color: "#000000",
+    fontSize: 23,
+    fontStyle: "normal",
+    lineHeight: 25,
+    marginHorizontal: 20,
+  },
+
+  containerStyleScroll: {
+    gap: 10,
     paddingHorizontal: 20,
+  },
+
+  scrollFunds: {
+    width: "100%",
+    height: "auto",
+    marginTop: 15,
+  },
+
+  fundCard: {
+    width: 180,
+    alignItems: "flex-start",
+    height: 200,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#E6E6E6",
+    padding: 10,
+    gap: 5,
+  },
+
+  labelCard: {
+    fontWeight: "600",
+    color: "#000000",
+    fontSize: 18,
+    fontStyle: "normal",
+    lineHeight: 25,
+  },
+
+  contentValueCard: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 7,
+  },
+
+  valueLabelFund: {
+    fontWeight: "400",
+    color: "#000000",
+    fontSize: 18,
+    fontStyle: "normal",
+    lineHeight: 18,
+  },
+
+  profitabilityCard: {
+    fontWeight: "400",
+    color: "#0FDF8F",
+    fontSize: 18,
+    fontStyle: "normal",
+    lineHeight: 18,
   },
 });
 
