@@ -28,7 +28,7 @@
 - [Expo](https://docs.expo.dev/get-started/installation/)
 - [React Native](https://reactnative.dev/)
 - [React Native Chart Kit](https://github.com/indiespirit/react-native-chart-kit)
-- [vector Icons](https://docs.expo.dev/guides/icons/)
+- [Vector Icons](https://docs.expo.dev/guides/icons/)
 - [Navigation](https://reactnavigation.org/)
                  
                                                                                                                               
