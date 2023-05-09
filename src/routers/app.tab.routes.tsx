@@ -16,12 +16,13 @@ const Tab = () => {
         tabBarStyle: {
           height: Platform.OS === "ios" ? 100 : 75,
           paddingVertical: 10,
+          backgroundColor: "#000000",
         },
         tabBarItemStyle: { height: 55 },
         tabBarLabel: ({ focused, children }) => (
           <Text
             style={{
-              color: focused ? "#770FDF" : "#000",
+              color: focused ? "#FFFFFF" : "#cccccc",
               fontSize: 18,
               fontWeight: "600",
             }}
@@ -39,7 +40,7 @@ const Tab = () => {
             <Entypo
               name="home"
               size={24}
-              color={focused ? "#770FDF" : "#000"}
+              color={focused ? "#FFFFFF" : "#cccccc"}
             />
           ),
         }}
@@ -52,7 +53,7 @@ const Tab = () => {
             <Fontisto
               name="arrow-swap"
               size={24}
-              color={focused ? "#770FDF" : "#000"}
+              color={focused ? "#FFFFFF" : "#cccccc"}
             />
           ),
         }}
@@ -65,7 +66,7 @@ const Tab = () => {
             <Foundation
               name="graph-pie"
               size={30}
-              color={focused ? "#770FDF" : "#000"}
+              color={focused ? "#FFFFFF" : "#cccccc"}
             />
           ),
         }}

@@ -6,7 +6,7 @@ const style = StyleSheet.create({
     minHeight: 69,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#770FDF",
+    backgroundColor: "#000000",
     borderRadius: 6,
     marginTop: 38,
   },

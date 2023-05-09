@@ -107,7 +107,7 @@ const Home = () => {
               </View>
 
               <TouchableOpacity style={style.contentRewards}>
-                <FontAwesome5 name="coins" size={18} color="#770FDF" />
+                <FontAwesome5 name="coins" size={18} color="#FFFFFF" />
                 <Text style={style.labelRewards}>Earn Rewards</Text>
               </TouchableOpacity>
             </View>

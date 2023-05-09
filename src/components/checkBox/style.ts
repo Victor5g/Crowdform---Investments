@@ -9,7 +9,7 @@ const style = StyleSheet.create({
   },
 
   selected: {
-    backgroundColor: "#770FDF",
+    backgroundColor: "#0000ff",
   },
 
   unSelected: {

@@ -78,7 +78,7 @@ const style = StyleSheet.create({
 
   contentRewards: {
     padding: 10,
-    backgroundColor: "#F7EFFF",
+    backgroundColor: "#000000",
     alignItems: "center",
     flexDirection: "row",
     gap: 9,
@@ -86,7 +86,7 @@ const style = StyleSheet.create({
   },
 
   labelRewards: {
-    color: "#770FDF",
+    color: "#FFFFFF",
     fontSize: 11,
     fontWeight: "600",
     fontStyle: "normal",
@@ -182,7 +182,7 @@ const style = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#770FDF",
+    backgroundColor: "#000000",
     padding: 20,
     borderRadius: 10,
   },
