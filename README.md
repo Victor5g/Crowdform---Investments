@@ -1,6 +1,7 @@
 <p align="center">
-<img alt="Icon" width='100' src="https://user-images.githubusercontent.com/51713169/235522044-01b95932-dda6-4101-9be4-0f9218b529d1.png">
+<img alt="Icon" width='100' src="https://user-images.githubusercontent.com/51713169/236978796-c8b53dca-c412-4841-8525-2df5aa7d2884.png">
 </p>
+
 
 <h1 align="center">Investment</h1>
 
