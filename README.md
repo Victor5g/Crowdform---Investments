@@ -1,6 +1,7 @@
 <p align="center">
-<img alt="Icon" width='100' src="https://user-images.githubusercontent.com/51713169/235522044-01b95932-dda6-4101-9be4-0f9218b529d1.png">
+<img alt="Icon" width='100' src="https://user-images.githubusercontent.com/51713169/236978796-c8b53dca-c412-4841-8525-2df5aa7d2884.png">
 </p>
+
 
 <h1 align="center">Investment</h1>
 
@@ -19,8 +20,8 @@
 
 ## 🖼 GIF 
 <p align="center">
- <img src='https://user-images.githubusercontent.com/51713169/235527319-9d2a1d6b-80e6-48ff-9174-9fee5cdbd494.gif' width='330' />
- <img src='https://user-images.githubusercontent.com/51713169/235528364-2f7eddd3-1056-438c-a2a3-adeaccd1e1b2.gif' width='330' />
+ <img src='https://user-images.githubusercontent.com/51713169/236983613-7d3eda35-c939-4368-9962-bd0fd670f33f.gif' width='345' />
+ <img src='https://user-images.githubusercontent.com/51713169/236983845-e61cc9bd-33d1-468b-8594-cbf39af24e38.gif' width='330' />
 
 </p>
 
