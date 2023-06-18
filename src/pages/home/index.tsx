@@ -19,6 +19,7 @@ import { LineChart } from "react-native-chart-kit";
 import { Person, Funds, NewsItem } from "./types";
 
 import Header from "../../components/header";
+import Loading from "../../components/loading";
 
 import style from "./style";
 
@@ -34,17 +35,33 @@ const chartConfig = (color: any) => {
   };
 };
 
+const FakeLoad = ({ style }: any) => {
+  return [...Array(3)].map((_, i) => (
+    <View key={i} style={style}>
+      <Loading loading={true} />
+    </View>
+  ));
+};
+
 const Home = () => {
   const [costummer, setCostumer] = useState<Person>();
   const [funds, setFunds] = useState<Funds>();
   const [news, setNews] = useState<NewsItem[]>();
+  const [loading, setLoading] = useState({
+    infoCostummer: true,
+    loadFunds: true,
+    loadNews: true,
+  });
 
   const infoCostummer = async () => {
+    setLoading((prevstate) => ({ ...prevstate, infoCostummer: true }));
     let info: any = await CostumerInfo();
     setCostumer(info);
+    setLoading((prevstate) => ({ ...prevstate, infoCostummer: false }));
   };
 
   const loadFunds = async () => {
+    setLoading((prevstate) => ({ ...prevstate, loadFunds: true }));
     let fund = await CostummerFunds();
     let details = [];
     for (const index of fund) {
@@ -52,16 +69,19 @@ const Home = () => {
       details.push(value);
     }
     setFunds({ fund: [...fund], detail: [...details] });
+    setLoading((prevstate) => ({ ...prevstate, loadFunds: false }));
   };
 
   const loadNews = async () => {
+    setLoading((prevstate) => ({ ...prevstate, loadNews: true }));
     let news_info = await News();
     setNews(news_info);
+    setLoading((prevstate) => ({ ...prevstate, loadNews: false }));
   };
 
   const loadScreen = async () => {
-    await loadFunds();
     await infoCostummer();
+    await loadFunds();
     await loadNews();
   };
 
@@ -82,7 +102,9 @@ const Home = () => {
             </TouchableOpacity>
 
             <Text style={style.labelAccount}>
-              {`Account: ${costummer?.portifolio?.symbol}${costummer?.portifolio?.value}`}
+              <Loading loading={loading.infoCostummer}>
+                {`Account: ${costummer?.portifolio?.symbol}${costummer?.portifolio?.value}`}
+              </Loading>
             </Text>
 
             <TouchableOpacity style={style.iconHeader}>
@@ -94,28 +116,30 @@ const Home = () => {
             <Text style={style.labelPortifolio}>Portifolio</Text>
 
             <View style={style.contentPortifolio}>
-              <View style={style.boxValue}>
-                <Text
-                  style={style.valuePortifolio}
-                >{`${costummer?.portifolio?.symbol}${costummer?.portifolio?.value}`}</Text>
-                <View style={style.ContentProfitability}>
-                  <Feather
-                    name={`arrow-${
-                      costummer?.portifolio?.profitability || "up"
-                    }-right`}
-                    size={18}
-                    color="#0FDF8F"
-                  />
+              <Loading loading={loading.infoCostummer}>
+                <View style={style.boxValue}>
                   <Text
-                    style={style.valueProfitability}
-                  >{`${costummer?.portifolio?.rentability}%`}</Text>
+                    style={style.valuePortifolio}
+                  >{`${costummer?.portifolio?.symbol}${costummer?.portifolio?.value}`}</Text>
+                  <View style={style.ContentProfitability}>
+                    <Feather
+                      name={`arrow-${
+                        costummer?.portifolio?.profitability || "up"
+                      }-right`}
+                      size={18}
+                      color="#0FDF8F"
+                    />
+                    <Text
+                      style={style.valueProfitability}
+                    >{`${costummer?.portifolio?.rentability}%`}</Text>
+                  </View>
                 </View>
-              </View>
 
-              <TouchableOpacity style={style.contentRewards}>
-                <FontAwesome5 name="coins" size={18} color="#FFFFFF" />
-                <Text style={style.labelRewards}>Earn Rewards</Text>
-              </TouchableOpacity>
+                <TouchableOpacity style={style.contentRewards}>
+                  <FontAwesome5 name="coins" size={18} color="#FFFFFF" />
+                  <Text style={style.labelRewards}>Earn Rewards</Text>
+                </TouchableOpacity>
+              </Loading>
             </View>
           </View>
         </Header>
@@ -129,7 +153,9 @@ const Home = () => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
+              {loading.loadFunds && <FakeLoad style={style.fundCard} />}
               {funds?.fund !== undefined &&
+                loading.loadFunds === false &&
                 funds.fund.map((value, index) => (
                   <TouchableOpacity key={index} style={style.fundCard}>
                     {value?.base === "Ionicons" && (
@@ -195,20 +221,22 @@ const Home = () => {
             </ScrollView>
 
             <TouchableOpacity style={style.contentLearn}>
-              <View style={style.boxLearn}>
-                <View style={style.contentLearnLabel}>
-                  <Text style={style.labelLearn}>
-                    Learn more about carbon credits
-                  </Text>
-                  <Text style={style.subLabelLearn}>
-                    Check out our top tips!
-                  </Text>
+              <Loading loading={loading.infoCostummer}>
+                <View style={style.boxLearn}>
+                  <View style={style.contentLearnLabel}>
+                    <Text style={style.labelLearn}>
+                      Learn more about carbon credits
+                    </Text>
+                    <Text style={style.subLabelLearn}>
+                      Check out our top tips!
+                    </Text>
+                  </View>
+                  <Image
+                    style={{ width: 100, height: 100 }}
+                    source={require("../../assets/illustration/statistics.png")}
+                  />
                 </View>
-                <Image
-                  style={{ width: 100, height: 100 }}
-                  source={require("../../assets/illustration/statistics.png")}
-                />
-              </View>
+              </Loading>
             </TouchableOpacity>
 
             <ScrollView
@@ -217,7 +245,9 @@ const Home = () => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
+              {loading.loadNews && <FakeLoad style={style.NewsCard} />}
               {news !== undefined &&
+                loading.loadNews === false &&
                 news.map((value, index) => (
                   <View key={index} style={style.NewsCard}>
                     <Image style={style.imgaeNews} source={value.banner} />
