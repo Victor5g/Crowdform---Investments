@@ -6,7 +6,7 @@ import style from "./style";
 const Loading = ({ loading, children }: LoadingItem) => {
   return loading ? (
     <View style={style.container}>
-      <ActivityIndicator size="small" color="#0000ff" />
+      <ActivityIndicator size="small" color="#000000" />
     </View>
   ) : (
     children
