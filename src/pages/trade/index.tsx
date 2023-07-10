@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -7,8 +8,9 @@ import {
   Dimensions,
 } from "react-native";
 import { AntDesign, Feather, Foundation } from "@expo/vector-icons";
-
 import { LineChart } from "react-native-chart-kit";
+
+import { Screen, FundObject } from "./types";
 
 import Header from "../../components/header";
 import Loading from "../../components/loading";
@@ -16,6 +18,8 @@ import Loading from "../../components/loading";
 import style from "./style";
 
 import { detailsFunds } from "../../constants/dummy";
+
+import { FundInfo } from "../../services/funds";
 
 const chartConfig = (color: any) => {
   return {
@@ -26,7 +30,21 @@ const chartConfig = (color: any) => {
   };
 };
 
-const Trade = () => {
+const Trade = ({ navigation, route }: Screen) => {
+  const [fund, setFund] = useState<FundObject>();
+  const [isLoading, setLoading] = useState(true);
+
+  const loadInfo = async (fundName: string) => {
+    setLoading(true);
+    let info = await FundInfo(fundName);
+    setFund(info);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    route.params?.fund && loadInfo(route.params?.fund);
+  }, [route.params?.fund]);
+
   return (
     <SafeAreaView style={style.container}>
       <ScrollView
@@ -35,14 +53,17 @@ const Trade = () => {
       >
         <Header>
           <View style={style.fundInformation}>
-            <TouchableOpacity style={style.iconBack}>
+            <TouchableOpacity
+              style={style.iconBack}
+              onPress={() => navigation.goBack()}
+            >
               <AntDesign name="arrowleft" size={28} color="black" />
             </TouchableOpacity>
 
             <View style={style.contentLabels}>
-              <Loading loading={false}>
-                <Text style={style.labelFund}>WindFund</Text>
-                <Text style={style.codeFund}>WFND</Text>
+              <Loading loading={isLoading}>
+                <Text style={style.labelFund}>{fund?.name}</Text>
+                <Text style={style.codeFund}>{fund?.key_fund}</Text>
               </Loading>
             </View>
             <View style={{ width: 40 }} />
@@ -50,61 +71,79 @@ const Trade = () => {
         </Header>
 
         <View style={style.contentDetail}>
-          <View style={style.boxValue}>
-            <Text style={style.valueFund}>{`$23.75`}</Text>
-            <View style={style.ContentProfitability}>
-              <Feather name={`arrow-up-right`} size={18} color="#0FDF8F" />
-              <Text style={style.valueProfitability}>{`3.51% ($1.21)`}</Text>
+          <Loading loading={isLoading}>
+            <View style={style.boxValue}>
+              <Text
+                style={style.valueFund}
+              >{`${fund?.money}${fund?.price}`}</Text>
+              <View style={style.ContentProfitability}>
+                <Feather
+                  name={`arrow-${fund?.profitability || "up"}-right`}
+                  size={18}
+                  color={fund?.profitability === "up" ? "#0FDF8F" : "#EE8688"}
+                />
+                <Text
+                  style={{
+                    ...style.valueProfitability,
+                    color: fund?.profitability === "up" ? "#0FDF8F" : "#EE8688",
+                  }}
+                >{`${fund?.rentability}% (${fund?.money}${fund?.rentabilityMoney})`}</Text>
+              </View>
             </View>
-          </View>
-          <Text style={style.valueFund}>{"2023"}</Text>
+            <Text style={style.valueFund}>{fund?.year}</Text>
+          </Loading>
         </View>
+        <View>
+          <Loading loading={isLoading}>
+            <LineChart
+              style={{ marginLeft: -59 }}
+              data={detailsFunds["Wind Fund"]}
+              width={Dimensions.get("screen").width + 95}
+              height={Dimensions.get("screen").height / 4}
+              chartConfig={chartConfig(
+                fund?.profitability === "up"
+                  ? "rgba(15, 223, 143,  100)"
+                  : "rgba(238, 134, 136, 1)"
+              )}
+              withHorizontalLabels={false}
+              withHorizontalLines={false}
+              withVerticalLabels={false}
+              withInnerLines={false}
+              withOuterLines={false}
+              withDots={true}
+              withShadow={false}
+            />
 
-        <LineChart
-          style={{ marginLeft: -59 }}
-          data={detailsFunds["Wind Fund"]}
-          width={Dimensions.get("screen").width + 95}
-          height={Dimensions.get("screen").height / 4}
-          chartConfig={chartConfig(
-            true ? "rgba(15, 223, 143,  100)" : "rgba(238, 134, 136, 1)"
-          )}
-          withHorizontalLabels={false}
-          withHorizontalLines={false}
-          withVerticalLabels={false}
-          withInnerLines={false}
-          withOuterLines={false}
-          withDots={true}
-          withShadow={false}
-        />
+            <View style={style.chartOptions}>
+              <TouchableOpacity style={style.periodButton}>
+                <Text style={style.labelPeriod}>1h</Text>
+              </TouchableOpacity>
 
-        <View style={style.chartOptions}>
-          <TouchableOpacity style={style.periodButton}>
-            <Text style={style.labelPeriod}>1h</Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={{ ...style.periodButton, ...style.selectedPeriod }}
+              >
+                <Text style={{ ...style.labelPeriod, ...style.selectedPeriod }}>
+                  1d
+                </Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={{ ...style.periodButton, ...style.selectedPeriod }}
-          >
-            <Text style={{ ...style.labelPeriod, ...style.selectedPeriod }}>
-              1d
-            </Text>
-          </TouchableOpacity>
+              <TouchableOpacity style={style.periodButton}>
+                <Text style={style.labelPeriod}>1w</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity style={style.periodButton}>
-            <Text style={style.labelPeriod}>1w</Text>
-          </TouchableOpacity>
+              <TouchableOpacity style={style.periodButton}>
+                <Text style={style.labelPeriod}>1m</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity style={style.periodButton}>
-            <Text style={style.labelPeriod}>1m</Text>
-          </TouchableOpacity>
+              <TouchableOpacity style={style.periodButton}>
+                <Text style={style.labelPeriod}>1y</Text>
+              </TouchableOpacity>
 
-          <TouchableOpacity style={style.periodButton}>
-            <Text style={style.labelPeriod}>1y</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={style.periodButton}>
-            <Text style={style.labelPeriod}>All</Text>
-          </TouchableOpacity>
+              <TouchableOpacity style={style.periodButton}>
+                <Text style={style.labelPeriod}>All</Text>
+              </TouchableOpacity>
+            </View>
+          </Loading>
         </View>
 
         <View style={style.contentInfo}>
@@ -112,55 +151,67 @@ const Trade = () => {
 
           <View style={style.infoDetails}>
             <View style={style.leftInfo}>
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>AUM</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+              <Loading loading={isLoading}>
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>AUM</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text
+                    style={style.valueInfo}
+                  >{`${fund?.money}${fund?.aum}m`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"$430.88m"}</Text>
-              </View>
 
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>Vintage Range</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>Vintage Range</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text
+                    style={style.valueInfo}
+                  >{`${fund?.vintageRange.start} - ${fund?.vintageRange.end}`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"2012 – 2023"}</Text>
-              </View>
 
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>Price at Close</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>Price at Close</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text
+                    style={style.valueInfo}
+                  >{`${fund?.money}${fund?.priceClose}`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"$17.68"}</Text>
-              </View>
+              </Loading>
             </View>
 
             <View style={style.rightInfo}>
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>Issue Date</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+              <Loading loading={isLoading}>
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>Issue Date</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text style={style.valueInfo}>{`${fund?.issueDate}`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"18/04/2023"}</Text>
-              </View>
 
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>TER</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>TER</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text style={style.valueInfo}>{`${fund?.ter}%`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"0.15%"}</Text>
-              </View>
 
-              <View style={style.info}>
-                <View style={style.contentLabel}>
-                  <Text style={style.infoLabel}>Price at Open</Text>
-                  <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                <View style={style.info}>
+                  <View style={style.contentLabel}>
+                    <Text style={style.infoLabel}>Price at Open</Text>
+                    <Feather name="alert-circle" size={22} color="#A0A0A0" />
+                  </View>
+                  <Text
+                    style={style.valueInfo}
+                  >{`${fund?.money}${fund?.priceOpen}`}</Text>
                 </View>
-                <Text style={style.valueInfo}>{"$17.74"}</Text>
-              </View>
+              </Loading>
             </View>
           </View>
         </View>
@@ -172,32 +223,61 @@ const Trade = () => {
           </View>
 
           <View style={style.contentPortifolio}>
-            <View style={style.boxValue}>
-              <Text style={style.valueFund}>{`23`} Credits</Text>
-              <View style={style.ContentProfitability}>
-                <Feather name={`arrow-up-right`} size={18} color="#0FDF8F" />
-                <Text style={style.valueProfitability}>{`8.41%`}</Text>
+            <Loading loading={isLoading}>
+              <View style={style.boxValue}>
+                <Text style={style.valueFund}>{`${fund?.credit} Credits`}</Text>
+                <View style={style.ContentProfitability}>
+                  <Feather
+                    name={`arrow-${fund?.profitabilityCredit || "up"}-right`}
+                    size={18}
+                    color={
+                      fund?.profitabilityCredit === "up" ? "#0FDF8F" : "#EE8688"
+                    }
+                  />
+                  <Text
+                    style={{
+                      ...style.valueProfitability,
+                      color:
+                        fund?.profitabilityCredit === "up"
+                          ? "#0FDF8F"
+                          : "#EE8688",
+                    }}
+                  >{`${fund?.rentabilityCredit}%`}</Text>
+                </View>
               </View>
-            </View>
 
-            <View style={style.boxValueFund}>
-              <Text style={style.valueFund}>{`$328.14`}</Text>
-              <Text style={style.purchaseFund}>Last purchase 28d ago</Text>
-            </View>
+              <View style={style.boxValueFund}>
+                <Text
+                  style={style.valueFund}
+                >{`${fund?.money}${fund?.currrentValue}`}</Text>
+                <Text
+                  style={style.purchaseFund}
+                >{`Last purchase ${fund?.lastPurchase} ago`}</Text>
+              </View>
+            </Loading>
           </View>
+
           <View style={style.contentButtons}>
-            <TouchableOpacity style={style.buttonSell}>
-              <Text style={style.labelSell}>Sell</Text>
+            <TouchableOpacity style={style.buttonSell} disabled={isLoading}>
+              <Loading loading={isLoading}>
+                <Text style={style.labelSell}>Sell</Text>
+              </Loading>
             </TouchableOpacity>
 
-            <TouchableOpacity style={style.buttonRetire}>
-              <Text style={style.labelRetire}>Retire credits</Text>
+            <TouchableOpacity style={style.buttonRetire} disabled={isLoading}>
+              <Loading loading={isLoading} invertColor>
+                <Text style={style.labelRetire}>Retire credits</Text>
+              </Loading>
             </TouchableOpacity>
           </View>
 
-          <Text style={style.footerButton}>
-            You’ve previously retired 28 credits of this asset
-          </Text>
+          <View style={style.contentFooter}>
+            <Loading loading={isLoading}>
+              <Text style={style.footerButton}>
+                {`You’ve previously retired ${fund?.retired} credits of this asset`}
+              </Text>
+            </Loading>
+          </View>
 
           <View style={style.contentInformation}>
             <Text style={style.labelInformation}>
@@ -211,8 +291,10 @@ const Trade = () => {
           </View>
 
           <View style={style.contentButtonBuy}>
-            <TouchableOpacity style={style.buttonBuy}>
-              <Text style={style.labelBuy}>Buy</Text>
+            <TouchableOpacity style={style.buttonBuy} disabled={isLoading}>
+              <Loading loading={isLoading} invertColor>
+                <Text style={style.labelBuy}>Buy</Text>
+              </Loading>
             </TouchableOpacity>
           </View>
         </View>

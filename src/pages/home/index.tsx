@@ -43,7 +43,7 @@ const FakeLoad = ({ style }: any) => {
   ));
 };
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [costummer, setCostumer] = useState<Person>();
   const [funds, setFunds] = useState<Funds>();
   const [news, setNews] = useState<NewsItem[]>();
@@ -157,7 +157,16 @@ const Home = () => {
               {funds?.fund !== undefined &&
                 loading.loadFunds === false &&
                 funds.fund.map((value, index) => (
-                  <TouchableOpacity key={index} style={style.fundCard}>
+                  <TouchableOpacity
+                    key={index}
+                    style={style.fundCard}
+                    onPress={() =>
+                      navigation.navigate({
+                        name: "Trade",
+                        params: { fund: value.name },
+                      })
+                    }
+                  >
                     {value?.base === "Ionicons" && (
                       <Ionicons
                         name={value.icon}

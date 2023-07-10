@@ -1,5 +1,5 @@
 import { routes } from "../constants/routes-api";
-import { detailsFunds } from "../constants/dummy";
+import { detailsFunds, fundsInfo } from "../constants/dummy";
 
 const emulatedApi = (route: string, base: any) => {
   return new Promise((resolve, reject) => {
@@ -17,6 +17,8 @@ export const api = {
   post: (route: string, data?: any) => {
     return route.includes("/detailsFund")
       ? emulatedApi(data.name, detailsFunds)
+      : route.includes("/funds-info")
+      ? emulatedApi(data.name, fundsInfo)
       : emulatedApi(route, routes);
   },
   get: (route: string): object => {

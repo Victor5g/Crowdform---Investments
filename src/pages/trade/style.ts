@@ -71,7 +71,6 @@ const style = StyleSheet.create({
   },
 
   valueProfitability: {
-    color: "#0FDF8F",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: 18,
@@ -91,7 +90,7 @@ const style = StyleSheet.create({
     padding: 9,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius:5,
+    borderRadius: 5,
   },
 
   selectedPeriod: {
@@ -259,13 +258,16 @@ const style = StyleSheet.create({
     letterSpacing: -0.32,
   },
 
+  contentFooter: {
+    marginTop: 16,
+  },
+
   footerButton: {
     color: "#A0A0A0",
     fontSize: 16,
     fontStyle: "normal",
     fontWeight: "400",
     letterSpacing: -0.22,
-    marginTop: 16,
   },
 
   contentInformation: {

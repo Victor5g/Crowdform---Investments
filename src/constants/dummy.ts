@@ -12,6 +12,7 @@ const mockBase = [
     Math.random() * 400,
     Math.random() * 900,
   ],
+
   [
     Math.random() * 100,
     Math.random() * 200,
@@ -25,6 +26,7 @@ const mockBase = [
     Math.random() * 9,
     Math.random() * 8,
   ],
+
   [
     Math.random() * 1000,
     Math.random() * 980,
@@ -56,6 +58,7 @@ export const detailsFunds = {
     ],
     datasets: [{ data: [...mockBase[0]] }],
   },
+
   "Sun Fund": {
     labels: [
       "16/02/22",
@@ -71,6 +74,7 @@ export const detailsFunds = {
     ],
     datasets: [{ data: [...mockBase[1]] }],
   },
+
   "Nature Fund": {
     labels: [
       "16/02/22",
@@ -86,6 +90,7 @@ export const detailsFunds = {
     ],
     datasets: [{ data: [...mockBase[2], ...mockBase[0]] }],
   },
+
   "Oil Fund": {
     labels: [
       "16/02/22",
@@ -100,5 +105,103 @@ export const detailsFunds = {
       "18/11/22",
     ],
     datasets: [{ data: [...mockBase[2]] }],
+  },
+};
+
+export const fundsInfo = {
+  "Wind Fund": {
+    price: 94.47,
+    money: "$",
+    year: 2023,
+    name: "Wind Fund",
+    key_fund: "WFND",
+    performance: detailsFunds["Wind Fund"],
+    rentability: 62.98,
+    rentabilityMoney: 10.83,
+    profitability: "up",
+    profitabilityCredit: "up",
+    rentabilityCredit: 0.29,
+    aum: 467.9,
+    issueDate: "19/05/2023",
+    ter: "0.78",
+    vintageRange: { start: 2022, end: 2023 },
+    priceOpen: 23.9,
+    priceClose: 98.7,
+    retired: 23,
+    credit: 98,
+    currrentValue: 98.38,
+    lastPurchase: "12h",
+  },
+
+  "Sun Fund": {
+    price: 7.97,
+    money: "$",
+    year: 2023,
+    name: "Sun Fund",
+    key_fund: "SNFD",
+    performance: detailsFunds["Sun Fund"],
+    rentability: 9.76,
+    rentabilityMoney: 0.89,
+    rentabilityCredit: 1.22,
+    profitability: "down",
+    profitabilityCredit: "down",
+    aum: 123.03,
+    issueDate: "17/03/2023",
+    ter: "0.08",
+    vintageRange: { start: 2022, end: 2023 },
+    priceOpen: 65.9,
+    priceClose: 23.9,
+    retired: 0,
+    credit: 456,
+    currrentValue: 129.03,
+    lastPurchase: "3m",
+  },
+
+  "Nature Fund": {
+    price: 34.09,
+    money: "$",
+    year: 2023,
+    name: "Nature Fund",
+    key_fund: "NEFD",
+    performance: detailsFunds["Nature Fund"],
+    rentability: 87.9,
+    rentabilityMoney: 13.75,
+    profitability: "up",
+    profitabilityCredit: "up",
+    rentabilityCredit: 24.9,
+    aum: 987.83,
+    issueDate: "19/08/2023",
+    ter: "18.9",
+    vintageRange: { start: 2022, end: 2023 },
+    priceOpen: 9.74,
+    priceClose: 45.7,
+    retired: 12,
+    credit: 139,
+    currrentValue: 456.09,
+    lastPurchase: "12h",
+  },
+
+  "Oil Fund": {
+    price: 9.36,
+    money: "$",
+    year: 2023,
+    name: "Oil Fund",
+    key_fund: "OLFND",
+    performance: detailsFunds["Oil Fund"],
+    rentability: 10.5,
+    rentabilityMoney: 0.01,
+    rentabilityCredit: 0.3,
+    profitability: "down",
+    profitabilityCredit: "down",
+    aum: 657.88,
+    issueDate: "11/03/2023",
+    ter: "0.89",
+    vintageRange: { start: 2022, end: 2023 },
+    priceOpen: 50.78,
+    priceClose: 23.89,
+    retired: 78,
+    credit: 40,
+    currrentValue: 238.1,
+    lastPurchase: "10d",
   },
 };
